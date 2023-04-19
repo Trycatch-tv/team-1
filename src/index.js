@@ -28,14 +28,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //VARIABLES GLOBALES
-
 app.use((req, res, next) => {
   next();
 });
 
 //RUTAS
 app.use(require('./rutas/'));
-app.use('/empleados', require('./rutas/empleados'));
+app.use('/empleadoss', require('./rutas/empleados'));
 //PUBLIC
 
 //STARTING THE SERVER
