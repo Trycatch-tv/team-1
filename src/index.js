@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 //RUTAS
 app.use(require('./rutas/'));
-app.use('/empleadoss', require('./rutas/empleados'));
+app.use('/empleados', require('./rutas/empleados'));
 //PUBLIC
 
 //STARTING THE SERVER
