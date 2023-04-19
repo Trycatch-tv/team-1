@@ -20,7 +20,7 @@ app.engine(
   })
 );
 
-app.set('view engineee', '.hbs');
+app.set('view engine', '.hbs');
 
 //MIDDLEWARS
 app.use(morgan('dev'));
