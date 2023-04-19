@@ -27,6 +27,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
 //VARIABLES GLOBALES
 
 app.use((req, res, next) => {
@@ -36,7 +37,11 @@ app.use((req, res, next) => {
 //RUTAS
 app.use(require('./rutas/'));
 app.use('/empleados', require('./rutas/empleados'));
+
 //PUBLIC
+let projectPath = __dirname
+projectPath = projectPath.slice(0, projectPath.length - 3)
+app.use(express.static(projectPath + '/public'));
 
 //STARTING THE SERVER
 app.listen(app.get('puerto'), () => {
