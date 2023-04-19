@@ -37,7 +37,7 @@ app.use(require('./rutas/'));
 app.use('/empleados', require('./rutas/empleados'));
 //PUBLIC
 
-//STARTING THE SERVER
+//STARTING THE SERVERRRRR
 app.listen(app.get('puerto'), () => {
   console.log('Servidor escuchando en el puerto', app.get('puerto'));
 });
