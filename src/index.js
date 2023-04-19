@@ -20,10 +20,7 @@ app.engine(
   })
 );
 
-///
-///
 app.set('view engine', '.hbs');
-////
 
 //MIDDLEWARS
 app.use(morgan('dev'));
