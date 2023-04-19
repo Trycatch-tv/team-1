@@ -15,4 +15,6 @@ router.get('/as', (req, res) => {
 //   next();
 // });
 
+//Creando las rutas para los empleados
+
 module.exports = router;
