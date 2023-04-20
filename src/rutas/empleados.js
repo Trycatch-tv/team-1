@@ -11,7 +11,6 @@ router.get("/", async(req, res) => {
 router.get("/listar", async(req, res) => {
   const lista_Empleados = await pool.query('SELECT * FROM `empleados`',function (error, results, fields){
     if(!error){
-      // res.render('./empleados/listarEmpleados', {data:results});
       res.send(results);
     }else{ 
       console.log('error en listar empleados');
@@ -25,7 +24,6 @@ router.get("/listar/:id", async(req, res) => {
   const { id } = req.params;
   await pool.query('SELECT * FROM `empleados` WHERE `id`=? ', [id], function (error, results, fields){
     if(!error){
-      // res.render('./empleados/listarEmpleados', {data:results});
       if(!results.length==0){
         res.send(results);
       }else{ 
@@ -79,6 +77,29 @@ router.delete('/delete/:id', async (req, res) => {
 // }
 res.send('estoy en delete')
 }); 
+
+// actualizar un Empleado
+router.put('/', async (req, res) => {
+  const id = req.body.id;
+  const name = req.body.nombre;
+  await pool.query('UPDATE `empleados` SET `nombre`=? WHERE `id`= ?', [name, id], function (error, results, fields){
+    var rows = JSON.parse(JSON.stringify(results));
+    if(!error){
+      if (rows.affectedRows == 0){
+        res.send('no se hizo ningun cambio en la DB')
+      }else{
+        console.log(rows);
+        
+        res.send(`Usuario ${name} actualizado con exito`);
+
+      }
+    }else{ 
+      console.log(`error al Actualzar empleado ${name}`);
+      res.send(error);
+    }
+  });
+}); 
+
 
 
 module.exports = router;

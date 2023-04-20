@@ -23,7 +23,7 @@ const pool = mysql.createPool(database);
 
 pool.getConnection((err, connection) => {
   if (err){
-    console.log('db error ❌');
+    console.log('db error ❌:', err.code);
   }
   if (connection){
     connection.release();
