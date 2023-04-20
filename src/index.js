@@ -43,7 +43,7 @@ let projectPath = __dirname
 projectPath = projectPath.slice(0, projectPath.length - 3)
 app.use(express.static(projectPath + '/public'))
 // console.log(__dirname)
-// app.use(express.static(__dirname, '/public'))
+// app.use(express.static(__dirname, 'public'))
 
 
 //STARTING THE SERVER

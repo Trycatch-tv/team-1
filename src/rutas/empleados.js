@@ -9,6 +9,8 @@ router.get('/as', (req, res) => {
 router.get('/registro', (req, res) => {
   res.render('empleados/registro');
 });
+
+
 // router.get('/', (req, res) => {
 //   res.send('asas');
 // });
