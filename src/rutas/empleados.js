@@ -6,6 +6,11 @@ router.get('/as', (req, res) => {
   res.render('empleados/prueba');
 });
 
+router.get('/registro', (req, res) => {
+  res.render('empleados/registro');
+});
+
+
 // router.get('/', (req, res) => {
 //   res.send('asas');
 // });
@@ -15,6 +20,10 @@ router.get('/as', (req, res) => {
 //   next();
 // });
 
+<<<<<<< HEAD
 //Creando las rutas para los empleados
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> JC-Frontend
