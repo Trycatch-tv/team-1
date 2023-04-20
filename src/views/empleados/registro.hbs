@@ -1,129 +1,76 @@
 <main class="page">
   <section class="contact">
     <h2>Registro de empleado nuevo</h2>
+    <h3>Datos personales</h3>
     <form action="">
-      <div class="form-grupo">
-        <label for="name">Nombre</label>
-        <input type="text" name="name" id="name" required />
+
+      <div class="completeDoubleInputLine">
+        <div class="form-grupo dobleInput">
+          <label for="name">Nombre</label>
+          <input type="text" name="name" id="name" required />
+        </div>
+
+        <div class="form-grupo dobleInput">
+          <label for="apellido">Apellido</label>
+          <input type="text" name="apellido" id="apellido" required />
+        </div>
       </div>
 
-      <div class="form-grupo">
-        <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" id="apellido" required />
-      </div>
+      <div class="completeDoubleInputLine">
+        <div class="form-grupo dobleInput">
+          <label for="identificacion">Identificación</label>
+          <input
+            type="text"
+            name="identificacion"
+            id="identificacion"
+            required
+          />
+        </div>
 
-      <div class="form-grupo">
-        <label for="identificacion">Identificación</label>
-        <input type="text" name="identificacion" id="identificacion" required />
+        <div class="form-grupo dobleInput">
+          <label for="birthday">Fecha de nacimiento</label>
+          <input type="date" name="birthday" id="birthday" required />
+        </div>
       </div>
 
       <div class="form-grupo">
         <label for="direccion">Dirección</label>
         <input type="text" name="direction" id="direction" required />
       </div>
-      <div class="form-grupo">
-        <label for="phone">Teléfono</label>
-        <input type="tel" name="phone" id="phone" required />
+
+      <div class="completeDoubleInputLine">
+        <div class="form-grupo dobleInput">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required />
+        </div>
+        <div class="form-grupo dobleInput">
+          <label for="phone">Teléfono</label>
+          <input type="tel" name="phone" id="phone" required />
+        </div>
       </div>
-      <div class="form-grupo">
-        <label for="birthday">Fecha de nacimiento</label>
-        <input type="date" name="birthday" id="birthday" required />
-      </div>
-      <div class="form-grupo">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required />
-      </div>
-      <div class="form-grupo">
-        <label for="ingreso">Fecha de ingreso</label>
-        <input type="date" name="ingreso" id="ingreso" required />
-      </div>
+
+      <h3>Datos de ingreso</h3>
+
       <div class="form-grupo">
         <label for="cargo">Cargo</label>
         <input type="text" name="cargo" id="cargo" required />
       </div>
-      <div class="form-grupo">
-        <label for="sueldo">Sueldo</label>
-        <input type="text" name="sueldo" id="sueldo" required />
-      </div>
 
-      <button type="submit">Registrar</button>
+      <div class="completeDoubleInputLine">
+        <div class="form-grupo dobleInput">
+          <label for="ingreso">Fecha de ingreso</label>
+          <input type="date" name="ingreso" id="ingreso" required />
+        </div>
+
+        <div class="form-grupo dobleInput">
+          <label for="sueldo">Sueldo</label>
+          <input type="text" name="sueldo" id="sueldo" required />
+        </div>
+      </div>
+      <div class="button">
+        <button type="submit">Registrar</button>
+      </div>
     </form>
-    {{! <form>
-    <div class="form-row">
-      <div class="col">
-        <label for="inpFirstName">Nombre</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="First name"
-          name="inpFirstName"
-        />
-      </div>
-      <div class="col">
-        <label for="inpLastName">Apellido</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Last name"
-          name="inpLastName"
-        />
-      </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" />
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Password</label>
-        <input type="password" class="form-control" id="inputPassword4" />
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputAddress"
-        placeholder="1234 Main St"
-      />
-    </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputAddress2"
-        placeholder="Apartment, studio, or floor"
-      />
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity" />
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip" />
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck" />
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form> }}
   </section>
 </main>
