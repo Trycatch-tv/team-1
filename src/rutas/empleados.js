@@ -7,19 +7,19 @@ router.get("/", async(req, res) => {
   res.render('./empleados/menu')
 });
 
-//listar Empleados
+//listar Empleados - http://localhost:3000/empleados/listar
 router.get("/listar", async(req, res) => {
   const lista_Empleados = await pool.query('SELECT * FROM `empleados`',function (error, results, fields){
     if(!error){
       res.send(results);
     }else{ 
       console.log('error en listar empleados');
-      res.send(error)
+      res.send(error);
     }
   });
 });
 
-//Buscar empleado por id
+//Buscar empleado por id - http://localhost:3000/empleados/listar/1
 router.get("/listar/:id", async(req, res) => {
   const { id } = req.params;
   await pool.query('SELECT * FROM `empleados` WHERE `id`=? ', [id], function (error, results, fields){
@@ -36,7 +36,8 @@ router.get("/listar/:id", async(req, res) => {
   });
 });
 
-//Registrar un Empleado
+//Registrar un Empleado - http://localhost:3000/empleados/add json: {"id":""}
+//ingresar la DNI como PK
 router.post('/add', async (req, res) => {
   const name  = req.body.name;
   await pool.query('INSERT INTO `empleados` (`id`, `nombre`) VALUES (NULL, ?)', [name], function (error, results, fields){
@@ -62,36 +63,29 @@ router.post('/add', async (req, res) => {
 //   });
 // }); 
 
-// Eliminar un Empleado
-router.delete('/delete/:id', async (req, res) => {
+// Eliminar un Empleado - http://localhost:3000/empleados/9
+router.delete('/:id', async (req, res) => {
+  try{
   const { id }  = req.params;
-  await pool.query('DELETE FROM `empleados` WHERE `id`= ?)', [id], function (error, results, fields){
-    res.send()
+  await pool.query('DELETE FROM `empleados` WHERE `id`= ?', [parseInt(id)], function (error, results, fields){
+    res.send(results)
   });
-//   try {
-//     const { id } = req.params;
-//     // await pool.query('DELETE FROM empleados WHERE id = ?', id);
-//     res.send({status: 'deleted'});
-// } catch(err) {
-//     res.json({status: 'error'});
-// }
-res.send('estoy en delete')
+} catch(err) {
+      res.send(err)
+  }
 }); 
 
-// actualizar un Empleado
+// actualizar un Empleado - http://localhost:3000/empleados/ json: {id, name}
 router.put('/', async (req, res) => {
   const id = req.body.id;
-  const name = req.body.nombre;
+  const name = req.body.name;
   await pool.query('UPDATE `empleados` SET `nombre`=? WHERE `id`= ?', [name, id], function (error, results, fields){
     var rows = JSON.parse(JSON.stringify(results));
     if(!error){
       if (rows.affectedRows == 0){
         res.send('no se hizo ningun cambio en la DB')
       }else{
-        console.log(rows);
-        
         res.send(`Usuario ${name} actualizado con exito`);
-
       }
     }else{ 
       console.log(`error al Actualzar empleado ${name}`);
