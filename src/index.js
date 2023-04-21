@@ -27,7 +27,6 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
 //VARIABLES GLOBALES
 
 app.use((req, res, next) => {
@@ -40,7 +39,6 @@ app.use('/empleados', require('./rutas/empleados'));
 
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 //STARTING THE SERVER
 app.listen(app.get('puerto'), () => {
