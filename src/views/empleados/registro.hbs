@@ -47,6 +47,16 @@
           <label for="phone">Teléfono</label>
           <input type="tel" name="phone" id="phone" required />
         </div>
+        <div class="form-grupo dobleInput">
+          <label for="department">Departamento</label>
+          <input name="department" id="departmentt" list="department" required />
+          <datalist id="department">
+            <option value="Recursos humanos"></option>
+            <option value="Sistemas"></option>
+            <option value="Administracion"></option>
+            <option value="Contabilidad"></option>
+          </datalist>
+        </div>
       </div>
 
       <h3>Datos de ingreso</h3>
@@ -57,10 +67,6 @@
       </div>
 
       <div class="completeDoubleInputLine">
-        <div class="form-grupo dobleInput">
-          <label for="departament">Departamento</label>
-          <input type="text" name="departament" id="departament" required />
-        </div>
 
         <div class="form-grupo dobleInput">
           <label for="project">Proyecto</label>

@@ -10,6 +10,11 @@ router.get('/registro', (req, res) => {
   res.render('empleados/registro');
 });
 
+router.get('/datosingreso', (req, res) => {
+  res.render('empleados/datosingreso');
+});
+
+
 // router.get('/', (req, res) => {
 //   res.send('asas');
 // });
