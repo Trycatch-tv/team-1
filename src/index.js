@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const { log } = require('console');
 
 //INICIALIZACIONES
 const app = express();
@@ -36,7 +37,9 @@ app.use((req, res, next) => {
 //RUTAS
 app.use(require('./rutas/'));
 app.use('/empleados', require('./rutas/empleados'));
+
 //PUBLIC
+app.use(express.static(path.join(__dirname, 'public')));
 
 //STARTING THE SERVER
 app.listen(app.get('puerto'), () => {

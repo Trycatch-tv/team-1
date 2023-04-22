@@ -2,7 +2,7 @@
   <section class="contact">
     <h2>Registro de empleado nuevo</h2>
     <h3>Datos personales</h3>
-    <form action="">
+    <form action="/empleados/registro" method="POST">
 
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
@@ -19,12 +19,7 @@
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
           <label for="identificacion">Identificación</label>
-          <input
-            type="text"
-            name="identificacion"
-            id="identificacion"
-            required
-          />
+          <input type="text" name="identificacion" id="identificacion" required />
         </div>
 
         <div class="form-grupo dobleInput">
@@ -51,11 +46,22 @@
 
       <h3>Datos de ingreso</h3>
 
-      <div class="form-grupo">
+       <div class="form-grupo">
         <label for="cargo">Cargo</label>
         <input type="text" name="cargo" id="cargo" required />
       </div>
 
+      <div class="completeDoubleInputLine">
+        <div class="form-grupo dobleInput">
+          <label for="departament">Departamento</label>
+          <input type="text" name="departament" id="departament" required />
+        </div>
+
+        <div class="form-grupo dobleInput">
+          <label for="project">Proyecto</label>
+          <input type="text" name="project" id="project" required />
+        </div>
+      </div>
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
           <label for="ingreso">Fecha de ingreso</label>

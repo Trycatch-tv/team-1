@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
-//Menu (opcional - solo por mirar)
-router.get("/", async(req, res) => {
-  res.render('./empleados/menu')
-});
+// //Menu (opcional - solo por mirar)
+// router.get("/", async(req, res) => {
+//   res.render('./empleados/menu')
+// });
 
 //listar Empleados - http://localhost:3000/empleados/listar
 router.get("/listar", async(req, res) => {
@@ -38,11 +38,12 @@ router.get("/listar/:id", async(req, res) => {
 
 //Registrar un Empleado - http://localhost:3000/empleados/add json: {"id":""}
 //ingresar la DNI como PK
-router.post('/add', async (req, res) => {
+router.post('/registro', async (req, res) => {
   const name  = req.body.name;
   await pool.query('INSERT INTO `empleados` (`id`, `nombre`) VALUES (NULL, ?)', [name], function (error, results, fields){
     if(!error){
-        res.send(`Usuario ${name} Registrado con exito`);
+        // res.send(`Usuario ${name} Registrado con exito`);
+        res.render('empleados/registro');
     }else{ 
       console.log('error al Registrar empleado');
       res.send(error);
@@ -94,6 +95,8 @@ router.put('/', async (req, res) => {
   });
 }); 
 
-
+router.get('/registro', (req, res) => {
+  res.render('empleados/registro');
+});
 
 module.exports = router;
