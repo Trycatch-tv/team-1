@@ -2,14 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
-// //Menu (opcional - solo por mirar)
-// router.get("/", async(req, res) => {
-//   res.render('./empleados/menu')
-// });
 
 //listar Empleados - http://localhost:3000/empleados/listar
 router.get("/listar", async(req, res) => {
-  const lista_Empleados = await pool.query('SELECT * FROM `empleados`',function (error, results, fields){
+  const lista_Empleados = await pool.query('SELECT * FROM `empleado`',function (error, results, fields){
     if(!error){
       res.send(results);
     }else{ 
@@ -39,8 +35,32 @@ router.get("/listar/:id", async(req, res) => {
 //Registrar un Empleado - http://localhost:3000/empleados/add json: {"id":""}
 //ingresar la DNI como PK
 router.post('/registro', async (req, res) => {
-  const name  = req.body.name;
-  await pool.query('INSERT INTO `empleados` (`id`, `nombre`) VALUES (NULL, ?)', [name], function (error, results, fields){
+  const Nombre  = req.body.name;
+  const Apellido  = req.body.apellido;
+  const idEmpleado  = req.body.identificacion;
+  const FechaNacimiento = req.body.birthday;
+  const Direccion = req.body.direction;
+  const Email  = req.body.email;
+  const Telefono = req.body.phone;
+  const Cargo  = req.body.cargo;
+  const Departamento = req.body.departament;
+  const Proyecto = req.body.project;
+  const FechaIngreso  = req.body.ingreso;
+  const Sueldo  = req.body.sueldo;
+  console.log(Nombre);
+  console.log(Apellido);
+  console.log(idEmpleado);
+  console.log(FechaNacimiento);
+  console.log(Direccion);
+  console.log(Email);
+  console.log(Telefono);
+  console.log(Cargo);
+  console.log(Departamento);
+  console.log(Proyecto);
+  console.log(FechaIngreso);
+  console.log(Sueldo);
+  
+  await pool.query('INSERT INTO empleados (nombre, apellido, id_empleado, fecha_nacimiento, direccion, email, telefono, cargo, departamento, proyecto, fecha_ingreso, sueldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [Nombre, Apellido, idEmpleado, FechaNacimiento, Direccion, Email, Telefono, Cargo, Departamento, Proyecto, FechaIngreso, Sueldo], function (error, results, fields){
     if(!error){
         // res.send(`Usuario ${name} Registrado con exito`);
         res.render('empleados/registro');
@@ -51,7 +71,7 @@ router.post('/registro', async (req, res) => {
   });
 }); 
 
-// //delete
+// opcional//delete
 // router.post('/delete', async (req, res) => {
 //   const id  = req.body.id;
 //   await pool.query('DELETE FROM empleados WHERE id= ?', [id], function (error, results, fields){
@@ -100,3 +120,16 @@ router.get('/registro', (req, res) => {
 });
 
 module.exports = router;
+
+
+// {
+//   "idEmpleado":"1094265000",
+//   "Nombre":"Luis Angelo",
+//   "Apellido":"Pacheco Ramirez",
+//   "Email":"lApacheco@gmail.com",
+//   "FechaContratacion":"23/04/2023",
+//   "PagoPorHora":"2000",
+//   "NIT":"01094265000",
+//   "Activo":"1",
+//   "Cargo":"Desarrollador"
+// }
