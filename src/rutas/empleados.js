@@ -7,7 +7,9 @@ const pool = require('../database');
 router.get("/listar", async(req, res) => {
   const lista_Empleados = await pool.query('SELECT * FROM `empleado`',function (error, results, fields){
     if(!error){
-      res.send(results);
+      res.render('./empleados/listar', {data:results})
+      // console.log(results);
+      
     }else{ 
       console.log('error en listar empleados');
       res.send(error);
@@ -90,7 +92,8 @@ router.post('/registro', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try{
   const { id }  = req.params;
-  await pool.query('DELETE FROM `empleados` WHERE `id`= ?', [parseInt(id)], function (error, results, fields){
+  // INSERT INTO `empleado` (`nombre`, `apellido`, `id_empleado`, `fecha_nacimiento`, `direccion`, `email`, `telefono`, `cargo`, `departamento`, `proyecto`, `fecha_ingreso`, `sueldo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  await pool.query('DELETE FROM `empleados` WHERE `id`= ?', [id], function (error, results, fields){
     res.send(results)
   });
 } catch(err) {

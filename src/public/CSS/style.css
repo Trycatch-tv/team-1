@@ -63,7 +63,8 @@ h2, h3 {
 label,
 input {
   vertical-align: middle;
-  width: 100%;
+  
+  width: 95%;
 }
 
 label {
@@ -122,4 +123,16 @@ textarea:focus-visible {
 
 .dobleInput{
   width: 100%;
+}
+table{
+  margin: 0 auto;
+}
+
+table td{
+  text-transform: capitalize;
+}
+
+td svg{
+ width: 30px;
+ height: 30px;
 }
