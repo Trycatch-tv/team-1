@@ -1,4 +1,4 @@
-/* Reset box-sizing */
+Reset box-sizing
 html {
   box-sizing: border-box;
 }
@@ -12,7 +12,7 @@ body {
   /* display: grid; */
   /* place-content: center; */
   color: #333;
-  background-color: #b61818;
+  background-color: #f3f3f3;
 }
 
 .page {

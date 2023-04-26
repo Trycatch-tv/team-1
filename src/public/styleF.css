@@ -1,0 +1,14 @@
+Reset box-sizing
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  
+  background-color: #ebcce1;
+}

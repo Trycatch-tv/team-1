@@ -47,23 +47,25 @@ router.post('/registro', async (req, res) => {
   const Proyecto = req.body.project;
   const FechaIngreso  = req.body.ingreso;
   const Sueldo  = req.body.sueldo;
-  console.log(Nombre);
-  console.log(Apellido);
-  console.log(idEmpleado);
+  console.log(Nombre);//
+  console.log(Apellido);//
+  console.log(idEmpleado);//
   console.log(FechaNacimiento);
   console.log(Direccion);
-  console.log(Email);
+  console.log(Email);//
   console.log(Telefono);
   console.log(Cargo);
   console.log(Departamento);
   console.log(Proyecto);
   console.log(FechaIngreso);
   console.log(Sueldo);
-  
-  await pool.query('INSERT INTO empleados (nombre, apellido, id_empleado, fecha_nacimiento, direccion, email, telefono, cargo, departamento, proyecto, fecha_ingreso, sueldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [Nombre, Apellido, idEmpleado, FechaNacimiento, Direccion, Email, Telefono, Cargo, Departamento, Proyecto, FechaIngreso, Sueldo], function (error, results, fields){
+
+  // INSERT INTO `empleado` (`nombre`, `apellido`, `id_empleado`, `fecha_nacimiento`, `direccion`, `email`, `telefono`, `cargo`, `departamento`, `proyecto`, `fecha_ingreso`, `sueldo`) VALUES ('nadia', 'ramirez', '10651111', '2023-01-01', 'mnz H casa 90', 'n@gmail.com', '316 555 5555', 'Gerente', 'Gerencia', 'Gamer', '2023-04-24', '3000000');
+
+  await pool.query('INSERT INTO `empleado` (`nombre`, `apellido`, `id_empleado`, `fecha_nacimiento`, `direccion`, `email`, `telefono`, `cargo`, `departamento`, `proyecto`, `fecha_ingreso`, `sueldo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [Nombre, Apellido, idEmpleado, FechaNacimiento, Direccion, Email, Telefono, Cargo, Departamento, Proyecto, FechaIngreso, Sueldo], function (error, results, fields){
     if(!error){
-        // res.send(`Usuario ${name} Registrado con exito`);
-        res.render('empleados/registro');
+        res.send(`Usuario ${Nombre} Registrado con exito`);
+        // res.render('empleados/registro');
     }else{ 
       console.log('error al Registrar empleado');
       res.send(error);
