@@ -124,17 +124,8 @@ router.get('/registro', (req, res) => {
   res.render('empleados/registro');
 });
 
+router.get('/login', (req, res) => {
+  res.render('empleados/login');
+});
+
 module.exports = router;
-
-
-// {
-//   "idEmpleado":"1094265000",
-//   "Nombre":"Luis Angelo",
-//   "Apellido":"Pacheco Ramirez",
-//   "Email":"lApacheco@gmail.com",
-//   "FechaContratacion":"23/04/2023",
-//   "PagoPorHora":"2000",
-//   "NIT":"01094265000",
-//   "Activo":"1",
-//   "Cargo":"Desarrollador"
-// }

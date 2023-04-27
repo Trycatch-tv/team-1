@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const { log } = require('console');
+var favicon = require('serve-favicon')
 
 //INICIALIZACIONES
 const app = express();
@@ -40,6 +41,7 @@ app.use('/empleados', require('./rutas/empleados'));
 
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 //STARTING THE SERVER
 app.listen(app.get('puerto'), () => {
