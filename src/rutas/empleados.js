@@ -65,7 +65,7 @@ router.post("/registro", async (req, res) => {
     Departamento,
     Proyecto,
     FechaIngreso,
-    Sueldo,
+    Sueldo
   );
   
   await pool.query(
@@ -90,6 +90,63 @@ router.post("/registro", async (req, res) => {
         // res.render('empleados/registro');
       } else {
         console.log("error al Registrar empleado");
+        res.send(error);
+      }
+    }
+  );
+});
+
+router.post("/update", async (req, res) => {
+  const Nombre = req.body.name;
+  const Apellido = req.body.apellido;
+  const idEmpleado = req.body.identificacion;
+  const FechaNacimiento = req.body.birthday;
+  const Direccion = req.body.direction;
+  const Email = req.body.email;
+  const Telefono = req.body.phone;
+  const Cargo = req.body.cargo;
+  const Departamento = req.body.departament;
+  const Proyecto = req.body.project;
+  const FechaIngreso = req.body.ingreso;
+  const Sueldo = req.body.sueldo;
+
+  console.log(Nombre); 
+  console.log(Apellido); 
+  console.log(idEmpleado); 
+  console.log(FechaNacimiento); 
+  console.log(Direccion); 
+  console.log(Email); 
+  console.log(Telefono); 
+  console.log(Cargo); 
+  console.log(Departamento); 
+  console.log(Proyecto); 
+  console.log(FechaIngreso); 
+  console.log(Sueldo);
+
+  
+  await pool.query(
+    "UPDATE `empleado` SET `nombre`= ?,`apellido`= ?,`id_empleado`= ?,`fecha_nacimiento`= ?,`direccion`= ?,`email`= ?,`telefono`= ?,`cargo`= ?,`departamento`= ?,`proyecto`= ?,`fecha_ingreso`= ?,`sueldo`= ? WHERE `id_empleado`= ? ",
+    [
+      Nombre,
+      Apellido,
+      idEmpleado,
+      FechaNacimiento,
+      Direccion,
+      Email,
+      Telefono,
+      Cargo,
+      Departamento,
+      Proyecto,
+      FechaIngreso,
+      Sueldo,
+      idEmpleado
+    ],
+    function (error, results, fields) {
+      if (!error) {
+        res.send(`Usuario ${Nombre} actualizar con exito`);
+        // res.render('empleados/registro');
+      } else {
+        console.log("error al actualizar empleado");
         res.send(error);
       }
     }
@@ -190,6 +247,7 @@ router.get("/login", (req, res) => {
 //llenar el formulario para actualizar datos del empleado.
 router.get("/update/:id", async (req, res) => {
   const { id } = req.params;
+  //convertDate: le da formato a la hora yyyy-mm-dd
   const convertDate = function (dateStr) {
     if (dateStr == "" || dateStr == null) return "";
     var fecha = new Date(dateStr);
@@ -200,23 +258,21 @@ router.get("/update/:id", async (req, res) => {
     return fechaFormateada;
   };
   await pool.query(
-    "SELECT * FROM `empleado` WHERE `id_empleado`=? ",
+    "SELECT * FROM `empleado` WHERE `id_empleado`= ? ",
     [id],
     function (error, results, fields) {
       if (!error) {
         if (!results.length == 0) {
           let resultFormatDate = results.map((empleado) => {
             let nuevoEmpleado = empleado;
-            nuevoEmpleado.fecha_nacimiento = convertDate(
-              empleado.fecha_nacimiento
-            );
+            nuevoEmpleado.fecha_nacimiento = convertDate(empleado.fecha_nacimiento);
             nuevoEmpleado.fecha_ingreso = convertDate(empleado.fecha_ingreso);
             return nuevoEmpleado;
           });
-          // console.log("resultFormatDate", resultFormatDate);
-          res.render("empleados/update", { data: resultFormatDate });
+          console.log("resultFormatDate", resultFormatDate);
+          res.render("empleados/update", { data:resultFormatDate });
         } else {
-          res.send(`El ID:${id} no existe`);
+          res.send(`El ID:${id} no existe   y estoy en update`);
         }
       } else {
         console.log("error en listar empleados");
