@@ -1,0 +1,14 @@
+<main class="page">
+    <h2>Informacion de los Colaboradores</h2>
+    <div class="d-flex justify-content-center py-4 ">
+        <section class="section-c rounded-20">
+                {{#each colaboradores}}
+                    <img src="{{this.imagen}}" alt="image" title="{{this.nombres}}" class="my-image" onclick="colaborado({{id}},'{{nombres}}','{{cargo}}','{{descripcion}}','{{contacto.email}}','{{contacto.telefono}}','{{contacto.linkedin}}')">
+                {{/each}}
+        </section>
+
+    </div>
+    <div id="descipcion" class="border-info rounded section-title" >
+    </div>
+
+</main>
