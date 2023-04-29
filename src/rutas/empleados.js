@@ -109,6 +109,7 @@ router.post("/update", async (req, res) => {
   const Proyecto = req.body.project;
   const FechaIngreso = req.body.ingreso;
   const Sueldo = req.body.sueldo;
+  const old_id_empleado = req.body.old_id;
 
   console.log(Nombre); 
   console.log(Apellido); 
@@ -122,6 +123,7 @@ router.post("/update", async (req, res) => {
   console.log(Proyecto); 
   console.log(FechaIngreso); 
   console.log(Sueldo);
+  console.log(old_id_empleado);
 
   
   await pool.query(
@@ -139,12 +141,13 @@ router.post("/update", async (req, res) => {
       Proyecto,
       FechaIngreso,
       Sueldo,
-      idEmpleado
+      old_id_empleado
     ],
     function (error, results, fields) {
       if (!error) {
-        res.send(`Usuario ${Nombre} actualizar con exito`);
-        // res.render('empleados/registro');
+        // res.send(`Usuario ${Nombre} actualizar con exito`);
+        // res.render('empleados/listar', { data: results });
+        res.redirect('/empleados/listar');
       } else {
         console.log("error al actualizar empleado");
         res.send(error);
@@ -269,8 +272,9 @@ router.get("/update/:id", async (req, res) => {
             nuevoEmpleado.fecha_ingreso = convertDate(empleado.fecha_ingreso);
             return nuevoEmpleado;
           });
-          console.log("resultFormatDate", resultFormatDate);
-          res.render("empleados/update", { data:resultFormatDate });
+          // console.log("resultFormatDate", resultFormatDate);
+
+          res.render(`empleados/update`, {data:resultFormatDate});
         } else {
           res.send(`El ID:${id} no existe   y estoy en update`);
         }
@@ -280,6 +284,7 @@ router.get("/update/:id", async (req, res) => {
       }
     }
   );
+
 });
 
 module.exports = router;

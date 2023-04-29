@@ -5,7 +5,9 @@
     <h3>Datos personales</h3>
     {{#each data}} 
     <form action="/empleados/update" method="POST">
-
+      <div class="form-grupo">
+      <input id="old_id" name="old_id" type="hidden" value="{{{this.id_empleado}}}">
+      </div>
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
           <label for="name">Nombre</label>
