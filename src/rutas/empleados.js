@@ -53,6 +53,21 @@ router.post("/registro", async (req, res) => {
   const Proyecto = req.body.project;
   const FechaIngreso = req.body.ingreso;
   const Sueldo = req.body.sueldo;
+  console.log(
+    Nombre, 
+    Apellido,
+    idEmpleado,
+    FechaNacimiento,
+    Direccion,
+    Email,
+    Telefono,
+    Cargo,
+    Departamento,
+    Proyecto,
+    FechaIngreso,
+    Sueldo,
+  );
+  
   await pool.query(
     "INSERT INTO `empleado` (`nombre`, `apellido`, `id_empleado`, `fecha_nacimiento`, `direccion`, `email`, `telefono`, `cargo`, `departamento`, `proyecto`, `fecha_ingreso`, `sueldo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
