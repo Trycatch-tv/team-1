@@ -1,0 +1,76 @@
+<main class="container pt-1 w-75">
+  <section class="mx-auto ">
+    <h2>Actualiza Datos Del Empleado</h2>
+    {{#each data}}
+    <form  method="PUT">
+    <div class="card p-3">
+      <h3>Datos Personales</h3>
+      <div class="form-grupo ">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" value="{{nombre}}" required />
+      </div>
+      <div class="form-grupo ">
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" id="apellido" value="{{apellido}}" required />
+      </div>
+
+      <div class="form-grupo ">
+        <label for="identificacion">Identificación</label>
+        <input type="text" name="identificacion" id="identificacion" value="{{id_empleado}}" required />
+      </div>
+
+      <div class="form-grupo ">
+        {{fecha_nacimiento}}
+        <label for="birthday">Fecha de nacimiento</label>
+        <input type="date" name="birthday" id="birthday" value="{{fecha_nacimiento}}"  required />
+      </div>
+
+      <div class="form-grupo">
+        <label for="direccion">Dirección</label>
+        <input type="text" name="direction" id="direction" value="{{direccion}}" required />
+      </div>
+
+      <div class="form-grupo ">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{email}}" required />
+      </div>
+
+      <div class="form-grupo ">
+        <label for="phone">Teléfono</label>
+        <input type="tel" name="phone" id="phone" value="{{telefono}}" required />
+      </div>
+    </div>
+
+    <div class="card p-3 mt-3">
+      <h3>Datos de ingreso</h3>
+      <div class="form-grupo">
+        <label for="cargo">Cargo</label>
+        <input type="text" name="cargo" id="cargo" value="{{cargo}}" required />
+      </div>
+
+      <div class="form-grupo">
+        <label for="departament">Departamento</label>
+        <input type="text" name="departament" id="departament"value="{{departamento}}" required />
+      </div>
+
+      <div class="form-grupo">
+        <label for="project">Proyecto</label>
+        <input type="text" name="project" id="project" value="{{proyecto}}" required />
+      </div>
+
+      <div class="form-grupo">
+        <label for="ingreso">Fecha de ingreso</label>
+        <input type="text" name="ingreso" id="ingreso" value="{{fecha_ingreso}}" required />
+      </div>
+
+      <div class="form-grupo">
+        <label for="sueldo">Sueldo</label>
+        <input type="text" name="sueldo" id="sueldo" value="{{sueldo}}" required />
+      </div>
+
+    </div>
+      <button class="btn btn-primary mt-2" type="submit">Guardar Cambios</button>
+    </form>
+      {{/each}}
+  </section>
+</main>

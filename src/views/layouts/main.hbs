@@ -10,11 +10,35 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-
     {{!-- {{> navbar}} --}}
     {{{body}}}
-    {{!-- {{login}} --}}
-
-
+    <script>
+        const formulario = document.querySelector('form');
+        formulario.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(formulario);
+        fetch('/empleados', {
+            method: 'PUT',
+            body: JSON.stringify(formData),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Hubo un error al hacer la solicitud');
+            }
+            console.log(body);
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        });
+    </script>
+    
 </body>
 </html>
