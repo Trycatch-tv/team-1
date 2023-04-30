@@ -91,11 +91,11 @@ router.get('/datosingreso', (req, res) => {
 //   res.render('empleados/lista', { list });
 // });
 
-router.get('/lista', async (req, res) => {
-  const list = await pool.query('SELECT * FROM empleado');
-  console.log(list);
-  res.render('empleados/lista', { list });
-});
+// router.get('/lista', async (req, res) => {
+//   const list = await pool.query('SELECT * FROM empleado');
+//   console.log(list);
+//   res.render('empleados/lista', { list });
+// });
 
 // router.get('/', (req, res) => {
 //   res.send('asas');
