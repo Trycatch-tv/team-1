@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
+router.get('/as', (req, res) => {
+  res.render('empleados/prueba');
+});
+
 router.get('/registro', (req, res) => {
   res.render('empleados/registro');
 });
@@ -11,7 +15,7 @@ router.get('/datosingreso', (req, res) => {
 });
 
 router.get('/lista', async (req, res) => {
-  const list = await pool.query('SELECT * FROM `EMPLEADO`');
+  const list = await pool.query('SELECT * FROM empleado');
   console.log(list);
   res.render('empleados/lista', { list });
 });
