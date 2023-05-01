@@ -14,96 +14,94 @@ router.get('/datosingreso', (req, res) => {
   res.render('empleados/datosingreso');
 });
 
-// router.get('/lista', (req, res) => {
-//   const list = [
-//     {
-//       id: 1,
-//       nombres: 'Juan Carlos',
-//       apellidos: 'García Pérez',
-//       cargo: 'Programador',
-//       estado: 1,
-//     },
-//     {
-//       id: 2,
-//       nombres: 'María Fernanda',
-//       apellidos: 'González Ortiz',
-//       cargo: 'Diseñadora',
-//       estado: 0,
-//     },
-//     {
-//       id: 3,
-//       nombres: 'Carlos Andrés',
-//       apellidos: 'Martínez Suárez',
-//       cargo: 'Gerente',
-//       estado: 1,
-//     },
-//     {
-//       id: 4,
-//       nombres: 'Laura Andrea',
-//       apellidos: 'Castro Sánchez',
-//       cargo: 'Contadora',
-//       estado: 0,
-//     },
-//     {
-//       id: 5,
-//       nombres: 'Santiago Alejandro',
-//       apellidos: 'Rojas Ramírez',
-//       cargo: 'Ingeniero',
-//       estado: 1,
-//     },
-//     {
-//       id: 6,
-//       nombres: 'Ana Sofía',
-//       apellidos: 'Hernández González',
-//       cargo: 'Marketing',
-//       estado: 0,
-//     },
-//     {
-//       id: 7,
-//       nombres: 'Juan David',
-//       apellidos: 'Herrera Gutiérrez',
-//       cargo: 'Programador',
-//       estado: 1,
-//     },
-//     {
-//       id: 8,
-//       nombres: 'Paola Alejandra',
-//       apellidos: 'Ortiz Pérez',
-//       cargo: 'Diseñadora',
-//       estado: 0,
-//     },
-//     {
-//       id: 9,
-//       nombres: 'Jorge Alberto',
-//       apellidos: 'Ramírez Castro',
-//       cargo: 'Gerente',
-//       estado: 1,
-//     },
-//     {
-//       id: 10,
-//       nombres: 'Isabela Sofía',
-//       apellidos: 'López Hernández',
-//       cargo: 'Contadora',
-//       estado: 0,
-//     },
-//   ];
+router.get('/lista', async (req, res) => {
+  const list = await pool.query('SELECT * FROM empleado');
+  console.log(list);
+  res.render('empleados/lista', { list });
+});
+//Metodo para traer los proyectos de la base de datos
+router.get('/datos', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM proyecto');
+    res.send(result);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
+});
 
-//   res.render('empleados/lista', { list });
-// });
+//Metodo para ingresar los proyectos
+router.post('/ingresodatos', async (req, res) => {
+  const { cargo, proyecto, descripcion } = req.body;
+  console.log(cargo, proyecto, descripcion);
 
-// router.get('/lista', async (req, res) => {
-//   const list = await pool.query('SELECT * FROM empleado');
-//   console.log(list);
-//   res.render('empleados/lista', { list });
-// });
+  try {
+    const rows = await pool.query(
+      'INSERT INTO proyecto(cargo, proyecto, descripcion) VALUES (?, ?, ?, ?)',
+      [cargo, proyecto, descripcion]
+    );
+    return res.send({
+      idDato: rows.insertId,
+      cargo,
+      proyecto,
+      departamento,
+      descripcion,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
+});
 
-// router.get('/', (req, res) => {
-//   res.send('asas');
-// });
+//Metodo para eliminar proyectos
+router.delete('/eliminar/:id', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM datos_ingreso WHERE idDato = ?',
+      [req.params.id]
+    );
+    console.log(result);
 
-// app.use('/', function (req, res, next) {
-//   res.render('User')
-//   next();
-// });
+    if (result.affectedRows <= 0)
+      return res.status(404).json({
+        message: 'No encontrado',
+      });
+
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
+});
+
+//Metodo para actualizar los proyectos
+router.patch('/actualizar/:id', async (req, res) => {
+  const { id } = req.params;
+  const { cargo, departamento, proyecto, sueldo } = req.body;
+
+  try {
+    const result = await pool.query(
+      'UPDATE datos_ingreso SET cargo = IFNULL(?, cargo), departamento = IFNULL(?, departamento), proyecto = IFNULL(?, proyecto), sueldo = IFNULL(?, sueldo) WHERE idDato = ?',
+      [cargo, departamento, proyecto, sueldo, id]
+    );
+
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: 'No encontrado' });
+
+    const rows = await pool.query(
+      'SELECT * FROM datos_ingreso WHERE idDato = ?',
+      [id]
+    );
+    console.log(result);
+    res.json(rows[0]);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
+});
 
 module.exports = router;
