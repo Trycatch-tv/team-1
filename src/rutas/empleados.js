@@ -1,290 +1,107 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const pool = require("../database");
+const pool = require('../database');
 
-//listar Empleados - http://localhost:3000/empleados/listar
-router.get("/listar", async (req, res) => {
-  const lista_Empleados = await pool.query(
-    "SELECT * FROM `empleado`",
-    function (error, results, fields) {
-      if (!error) {
-        res.render("./empleados/listar", { data: results });
-      } else {
-        console.log("error en listar empleados");
-        res.send(error);
-      }
-    }
-  );
+router.get('/as', (req, res) => {
+  res.render('empleados/prueba');
 });
 
-//Buscar empleado por id - http://localhost:3000/empleados/listar/1
-router.get("/listar/:id", async (req, res) => {
-  const { id } = req.params;
-  await pool.query(
-    "SELECT * FROM `empleados` WHERE `id`=? ",
-    [id],
-    function (error, results, fields) {
-      if (!error) {
-        if (!results.length == 0) {
-          res.send(results);
-        } else {
-          res.send(`El ID:${id} no existe`);
-        }
-      } else {
-        console.log("error en listar empleados");
-        res.send(error);
-      }
-    }
-  );
+router.get('/registro', (req, res) => {
+  res.render('empleados/registro');
 });
 
-//Registrar un Empleado - http://localhost:3000/empleados/add json: {"id":""}
-//ingresar la DNI como PK
-router.post("/registro", async (req, res) => {
-  const Nombre = req.body.name;
-  const Apellido = req.body.apellido;
-  const idEmpleado = req.body.identificacion;
-  const FechaNacimiento = req.body.birthday;
-  const Direccion = req.body.direction;
-  const Email = req.body.email;
-  const Telefono = req.body.phone;
-  const Cargo = req.body.cargo;
-  const Departamento = req.body.departament;
-  const Proyecto = req.body.project;
-  const FechaIngreso = req.body.ingreso;
-  const Sueldo = req.body.sueldo;
-  console.log(
-    Nombre, 
-    Apellido,
-    idEmpleado,
-    FechaNacimiento,
-    Direccion,
-    Email,
-    Telefono,
-    Cargo,
-    Departamento,
-    Proyecto,
-    FechaIngreso,
-    Sueldo
-  );
-  
-  await pool.query(
-    "INSERT INTO `empleado` (`nombre`, `apellido`, `id_empleado`, `fecha_nacimiento`, `direccion`, `email`, `telefono`, `cargo`, `departamento`, `proyecto`, `fecha_ingreso`, `sueldo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [
-      Nombre,
-      Apellido,
-      idEmpleado,
-      FechaNacimiento,
-      Direccion,
-      Email,
-      Telefono,
-      Cargo,
-      Departamento,
-      Proyecto,
-      FechaIngreso,
-      Sueldo,
-    ],
-    function (error, results, fields) {
-      if (!error) {
-        res.send(`Usuario ${Nombre} Registrado con exito`);
-        // res.render('empleados/registro');
-      } else {
-        console.log("error al Registrar empleado");
-        res.send(error);
-      }
-    }
-  );
+router.get('/datosingreso', (req, res) => {
+  res.render('empleados/datosingreso');
 });
 
-router.post("/update", async (req, res) => {
-  const Nombre = req.body.name;
-  const Apellido = req.body.apellido;
-  const idEmpleado = req.body.identificacion;
-  const FechaNacimiento = req.body.birthday;
-  const Direccion = req.body.direction;
-  const Email = req.body.email;
-  const Telefono = req.body.phone;
-  const Cargo = req.body.cargo;
-  const Departamento = req.body.departament;
-  const Proyecto = req.body.project;
-  const FechaIngreso = req.body.ingreso;
-  const Sueldo = req.body.sueldo;
-  const old_id_empleado = req.body.old_id;
-
-  console.log(Nombre); 
-  console.log(Apellido); 
-  console.log(idEmpleado); 
-  console.log(FechaNacimiento); 
-  console.log(Direccion); 
-  console.log(Email); 
-  console.log(Telefono); 
-  console.log(Cargo); 
-  console.log(Departamento); 
-  console.log(Proyecto); 
-  console.log(FechaIngreso); 
-  console.log(Sueldo);
-  console.log(old_id_empleado);
-
-  
-  await pool.query(
-    "UPDATE `empleado` SET `nombre`= ?,`apellido`= ?,`id_empleado`= ?,`fecha_nacimiento`= ?,`direccion`= ?,`email`= ?,`telefono`= ?,`cargo`= ?,`departamento`= ?,`proyecto`= ?,`fecha_ingreso`= ?,`sueldo`= ? WHERE `id_empleado`= ? ",
-    [
-      Nombre,
-      Apellido,
-      idEmpleado,
-      FechaNacimiento,
-      Direccion,
-      Email,
-      Telefono,
-      Cargo,
-      Departamento,
-      Proyecto,
-      FechaIngreso,
-      Sueldo,
-      old_id_empleado
-    ],
-    function (error, results, fields) {
-      if (!error) {
-        // res.send(`Usuario ${Nombre} actualizar con exito`);
-        // res.render('empleados/listar', { data: results });
-        res.redirect('/empleados/listar');
-      } else {
-        console.log("error al actualizar empleado");
-        res.send(error);
-      }
-    }
-  );
+router.get('/lista', async (req, res) => {
+  const list = await pool.query('SELECT * FROM empleado');
+  console.log(list);
+  res.render('empleados/lista', { list });
 });
-
-// opcional//delete
-// router.post('/delete', async (req, res) => {
-//   const id  = req.body.id;
-//   await pool.query('DELETE FROM empleados WHERE id= ?', [id], function (error, results, fields){
-//     if(!error){
-//         res.send(`Usuario Eliminado con exito`);
-//     }else{
-//       console.log('error al Eliminar empleado');
-//       res.send(error);
-//     }
-//   });
-// });
-
-// Eliminar un Empleado - http://localhost:3000/empleados/9
-router.delete("/:id", async (req, res) => {
+//Metodo para traer los proyectos de la base de datos
+router.get('/datos', async (req, res) => {
   try {
-    const { id } = req.params;
-    // INSERT INTO `empleado` (`nombre`, `apellido`, `id_empleado`, `fecha_nacimiento`, `direccion`, `email`, `telefono`, `cargo`, `departamento`, `proyecto`, `fecha_ingreso`, `sueldo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    await pool.query(
-      "DELETE FROM `empleados` WHERE `id`= ?",
-      [id],
-      function (error, results, fields) {
-        res.send(results);
-      }
-    );
-  } catch (err) {
-    res.send(err);
+    const result = await pool.query('SELECT * FROM proyecto');
+    res.send(result);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
   }
 });
 
-// actualizar un Empleado - http://localhost:3000/empleados/ json: {id, name}
-router.put("/", async (req, res) => {
-    console.log('estoy en PUT');
-    const data  = req.body
-    console.log(data);
-    
-    // console.log(req.headers);
- 
+//Metodo para ingresar los proyectos
+router.post('/ingresodatos', async (req, res) => {
+  const { cargo, proyecto, descripcion } = req.body;
+  console.log(cargo, proyecto, descripcion);
 
-  // const Nombre = req.body.name;
-  // const Apellido = req.body.apellido;
-  // const idEmpleado = req.body.identificacion;
-  // const FechaNacimiento = req.body.birthday;
-  // const Direccion = req.body.direction;
-  // const Email = req.body.email;
-  // const Telefono = req.body.phone;
-  // const Cargo = req.body.cargo;
-  // const Departamento = req.body.departament;
-  // const Proyecto = req.body.project;
-  // const FechaIngreso = req.body.ingreso;
-  // const Sueldo = req.body.sueldo;
-  // await pool.query(
-  //   "UPDATE `empleados` SET `nombre`= ?,`apellido`= ?,`id_empleado`= ?,`fecha_nacimiento`= ?,`direccion`= ?,`email`= ?,`telefono`= ?,`cargo`= ?,`departamento`= ?,`proyecto`= ?,`fecha_ingreso`= ?,`sueldo`= ? WHERE `id_empleado`= ?",
-  //   [
-  //     Nombre,
-  //     Apellido,
-  //     idEmpleado,
-  //     FechaNacimiento,
-  //     Direccion,
-  //     Email,
-  //     Telefono,
-  //     Cargo,
-  //     Departamento,
-  //     Proyecto,
-  //     FechaIngreso,
-  //     Sueldo,
-  //   ],
-  //   function (error, results, fields) {
-  //     var rows = JSON.parse(JSON.stringify(results));
-  //     if (!error) {
-  //       if (rows.affectedRows == 0) {
-  //         res.send("no se hizo ningun cambio en la DB");
-  //       } else {
-  //         res.send(`Usuario ${Nombre} actualizado con exito`);
-  //       }
-  //     } else {
-  //       console.log(`error al Actualzar empleado ${Nombre}`);
-  //       res.send(error);
-  //     }
-  //   }
-  // );
+  try {
+    const rows = await pool.query(
+      'INSERT INTO proyecto(cargo, proyecto, descripcion) VALUES (?, ?, ?, ?)',
+      [cargo, proyecto, descripcion]
+    );
+    return res.send({
+      idDato: rows.insertId,
+      cargo,
+      proyecto,
+      departamento,
+      descripcion,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
 });
 
-router.get("/registro", (req, res) => {
-  res.render("empleados/registro");
+//Metodo para eliminar proyectos
+router.delete('/eliminar/:id', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM datos_ingreso WHERE idDato = ?',
+      [req.params.id]
+    );
+    console.log(result);
+
+    if (result.affectedRows <= 0)
+      return res.status(404).json({
+        message: 'No encontrado',
+      });
+
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
 });
 
-router.get("/login", (req, res) => {
-  res.render("empleados/login");
-});
-
-//llenar el formulario para actualizar datos del empleado.
-router.get("/update/:id", async (req, res) => {
+//Metodo para actualizar los proyectos
+router.patch('/actualizar/:id', async (req, res) => {
   const { id } = req.params;
-  //convertDate: le da formato a la hora yyyy-mm-dd
-  const convertDate = function (dateStr) {
-    if (dateStr == "" || dateStr == null) return "";
-    var fecha = new Date(dateStr);
-    var anio = fecha.getFullYear();
-    var mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
-    var dia = fecha.getDate().toString().padStart(2, "0");
-    var fechaFormateada = anio + "-" + mes + "-" + dia;
-    return fechaFormateada;
-  };
-  await pool.query(
-    "SELECT * FROM `empleado` WHERE `id_empleado`= ? ",
-    [id],
-    function (error, results, fields) {
-      if (!error) {
-        if (!results.length == 0) {
-          let resultFormatDate = results.map((empleado) => {
-            let nuevoEmpleado = empleado;
-            nuevoEmpleado.fecha_nacimiento = convertDate(empleado.fecha_nacimiento);
-            nuevoEmpleado.fecha_ingreso = convertDate(empleado.fecha_ingreso);
-            return nuevoEmpleado;
-          });
-          // console.log("resultFormatDate", resultFormatDate);
+  const { cargo, departamento, proyecto, sueldo } = req.body;
 
-          res.render(`empleados/update`, {data:resultFormatDate});
-        } else {
-          res.send(`El ID:${id} no existe   y estoy en update`);
-        }
-      } else {
-        console.log("error en listar empleados");
-        res.send(error);
-      }
-    }
-  );
+  try {
+    const result = await pool.query(
+      'UPDATE datos_ingreso SET cargo = IFNULL(?, cargo), departamento = IFNULL(?, departamento), proyecto = IFNULL(?, proyecto), sueldo = IFNULL(?, sueldo) WHERE idDato = ?',
+      [cargo, departamento, proyecto, sueldo, id]
+    );
 
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: 'No encontrado' });
+
+    const rows = await pool.query(
+      'SELECT * FROM datos_ingreso WHERE idDato = ?',
+      [id]
+    );
+    console.log(result);
+    res.json(rows[0]);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
 });
 
 module.exports = router;

@@ -27,14 +27,10 @@ app.engine(
 app.set('view engine', '.hbs');
 
 //MIDDLEWARS
-app.use(cors({
-  origin: '*'
-}));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+
 
 //VARIABLES GLOBALES
 
@@ -45,10 +41,9 @@ app.use((req, res, next) => {
 //RUTAS
 app.use(require('./rutas/'));
 app.use('/empleados', require('./rutas/empleados'));
-
+app.use('/proyecto', require('./rutas/proyecto'));
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 //STARTING THE SERVER
 app.listen(app.get('puerto'), () => {

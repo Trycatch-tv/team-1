@@ -1,11 +1,19 @@
 module.exports = {
   database: {
-    host: 'localhost',
-    user: 'root',
-    password: '12345',
-    database: 'desarrollo',
+    host: 'bdjecgklcxjuisxcvlt5-mysql.services.clever-cloud.com',
+    user: 'uzslfjpet6c2gbmm',
+    password: 'jpH8zFGpKA5rhv652752',
+    database: 'bdjecgklcxjuisxcvlt5',
   },
 };
+// module.exports = {
+//   database: {
+//     host: 'localhost',
+//     user: 'root',
+//     password: '12345',
+//     database: 'desarrollo',
+//   },
+// };
 
 // const dotenv = require('dotenv').config();
 
