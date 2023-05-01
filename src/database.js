@@ -14,6 +14,11 @@ pool.getConnection((err, connection) => {
     if (err.code === 'ECONNREFUSED') {
       console.log('DATABASE CONNECTION WAS REFUSED');
     }
+    if (err.code === 'ER_UNKNOWN_ERROR') {
+      console.log(
+        'DATABASE SERVER DOES NOT ALLOW INSECURE CONNECTIONS, CLIENT MUST USE SSL/TLS'
+      );
+    }
   }
   if (connection) connection.release();
   console.log('LA CONEXION A LA BASE DE DATOS FUE EXITOSA');

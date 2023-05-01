@@ -1,10 +1,8 @@
-const dotenv = require('dotenv').config();
-
 module.exports = {
   database: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
+    host: 'bdjecgklcxjuisxcvlt5-mysql.services.clever-cloud.com',
+    user: 'uzslfjpet6c2gbmm',
+    password: 'jpH8zFGpKA5rhv652752',
+    database: 'bdjecgklcxjuisxcvlt5',
   },
 };
