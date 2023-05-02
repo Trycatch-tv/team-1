@@ -115,7 +115,7 @@ router.get('/colaboradores', (req, res) => {
       },
     ],
   };
-  //console.log(colaboradores);
+  // console.log(colaboradores);
   res.render('proyecto/acerca', colaboradores);
 });
 

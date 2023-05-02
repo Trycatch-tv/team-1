@@ -16,7 +16,7 @@ router.get('/datosingreso', (req, res) => {
 
 router.get('/lista', async (req, res) => {
   const list = await pool.query('SELECT * FROM EMPLEADO');
-  console.log(list);
+  // console.log(list);
   res.render('empleados/lista', { list });
 });
 //Metodo para traer los proyectos de la base de datos
