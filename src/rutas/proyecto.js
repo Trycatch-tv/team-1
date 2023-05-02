@@ -119,4 +119,80 @@ router.get('/colaboradores', (req, res) => {
   res.render('proyecto/acerca', colaboradores);
 });
 
+/********************* PROYECTO ************************/
+//Metodo para traer los proyectos de la base de datos
+router.get('/listaProyecto', async (req, res) => {
+  const listaProyecto = await pool.query(
+    'SELECT id_proyecto, id_empleado, nombre, descripcion, DATE_FORMAT(fecha_inicio, "%d-%m-%Y") AS fechaInit, DATE_FORMAT(fecha_final, "%d-%m-%Y") AS fechaEnd from PROYECTO'
+  );
+  // console.log(listaProyecto);
+  res.render('proyecto/listaProyecto', { listaProyecto });
+});
+
+//Metodo para ingresar los proyectos
+router.post('/ingresodatos', async (req, res) => {
+  const { id_empleado, nombre, descripcion, fecha_inicio, fecha_final } =
+    req.body;
+  const id = parseInt(id_empleado);
+  // console.log(newProyecto);
+  await pool.query(
+    'INSERT INTO PROYECTO (id_empleado, nombre, descripcion, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?)',
+    [id, nombre, descripcion, fecha_inicio, fecha_final]
+  );
+  res.redirect('/proyecto/listaProyecto');
+});
+
+//Metodo para eliminar proyectos
+router.get('/eliminarProyecto/:id_empleado', async (req, res) => {
+  const { id_empleado } = req.params;
+  try {
+    const result = await pool.query(
+      'DELETE FROM PROYECTO WHERE id_empleado = ?',
+      [id_empleado]
+    );
+    res.redirect('/proyecto/listaProyecto');
+    // console.log(result);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
+});
+
+//Metodo para actualizar los proyectos
+
+router.get('/editProyecto/:id_empleado', async (req, res) => {
+  const { id_empleado } = req.params;
+  const id = parseInt(id_empleado);
+  const proyecto = await pool.query(
+    'SELECT * from PROYECTO WHERE id_empleado = ?',
+    [id]
+  );
+  // console.log(proyecto);
+  res.render('proyecto/editProyecto', { empleado: proyecto[0] });
+});
+
+router.post('/actualizar/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion, fecha_inicio, fecha_final } = req.body;
+  // const newProyecto = {
+  //   nombre,
+  //   descripcion,
+  //   fecha_inicio,
+  //   fecha_final,
+  // };
+  try {
+    const resultado = await pool.query(
+      'UPDATE PROYECTO SET nombre = ?, descripcion = ?, fecha_inicio = ?, fecha_final = ? WHERE id_empleado = ?',
+      [nombre, descripcion, fecha_inicio, fecha_final, id]
+    );
+    res.redirect('/proyecto/listaProyecto');
+    // console.log(resultado);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
+});
+
 module.exports = router;
