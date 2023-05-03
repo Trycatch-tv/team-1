@@ -2,7 +2,7 @@
   <section class="contact">
     <h2>Registro de empleado nuevo</h2>
     <h3>Datos personales</h3>
-    <form action="">
+    <form action="/empleados/registro" method="POST">
 
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
@@ -23,8 +23,7 @@
             type="text"
             name="identificacion"
             id="identificacion"
-            required
-          />
+            required />
         </div>
 
         <div class="form-grupo dobleInput">
@@ -45,17 +44,18 @@
         </div>
         <div class="form-grupo dobleInput">
           <label for="phone">Teléfono</label>
-          <input type="tel" name="phone" id="phone" required />
+          {{!-- <input type="tel" name="phone" id="phone" required /> --}}
+          <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" required>
         </div>
         <div class="form-grupo dobleInput">
           <label for="department">Departamento</label>
-          <input name="department" id="departmentt" list="department" required />
-          <datalist id="department">
-            <option value="Recursos humanos"></option>
-            <option value="Sistemas"></option>
-            <option value="Administracion"></option>
-            <option value="Contabilidad"></option>
-          </datalist>
+          <select class="form-control dobleInput" name="department" id="department" required>
+            <option>Selecciona una opción</option>
+            <option value="Recursos humanos">Recursos humanos</option>
+            <option value="Sistemas">Sistemas</option>
+            <option value="Administracion">Administracion</option>
+            <option value="Contabilidad">Contabilidad</option>
+          </select>
         </div>
       </div>
 
