@@ -44,7 +44,7 @@ app.use('/proyecto', require('./rutas/proyecto'));
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
 
-//STARTING THE SERVER
+//STARTING THE SERVERRRRR
 app.listen(app.get('puerto'), () => {
   console.log('Servidor escuchando en el puerto', app.get('puerto'));
 });
