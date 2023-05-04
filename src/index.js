@@ -35,7 +35,10 @@ app.use((req, res, next) => {
 //RUTAS
 app.use(require('./rutas/'));
 app.use('/empleados', require('./rutas/empleados'));
+app.use('/proyecto', require('./rutas/proyecto'));
+
 //PUBLIC
+app.use(express.static(path.join(__dirname, 'public')));
 
 //STARTING THE SERVERRRRR
 app.listen(app.get('puerto'), () => {

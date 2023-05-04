@@ -1,0 +1,41 @@
+<main class="page">
+  <section class="contact">
+    <h2>Editar proyecto</h2>
+
+    <form action="/proyecto/actualizar/{{empleado.id_empleado}}" method="post">
+
+      <div class="form-grupo dobleInput">
+        <label for="proyectName">Nombre del proyecto</label>
+        <input type="text" name="nombre" value="{{empleado.nombre}}" id="proyectName" required />
+      </div>
+
+      <div class="form-grupo dobleInput">
+        <label for="projectDescription">Descripcion del proyecto</label>
+        <input
+          type="text"
+          value="{{empleado.descripcion}}"
+          name="descripcion"
+          id="projectDescription"
+          required
+        />
+      </div>
+
+      <div class="completeDoubleInputLine">
+        <div class="form-grupo dobleInput">
+          <label for="initDate">Fecha de inicio</label>
+          <input type="date" name="fecha_inicio" value="{{empleado.fecha_inicio}}" id="initDate" required />
+        </div>
+        <div class="form-grupo dobleInput">
+          <label for="endDate">Fecha de finalización</label>
+          <input type="date" name="fecha_final" value="{{empleado.fecha_final}}" id="endDate" required />
+        </div>
+      </div>
+
+
+      <div class="button">
+        <button type="submit">Registrar</button>
+      </div>
+    </form>
+
+  </section>
+</main>

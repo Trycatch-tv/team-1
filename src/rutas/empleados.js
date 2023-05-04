@@ -6,13 +6,16 @@ router.get('/as', (req, res) => {
   res.render('empleados/prueba');
 });
 
-// router.get('/', (req, res) => {
-//   res.send('asas');
-// });
+router.get('/registro', (req, res) => {
+  res.render('empleados/registro');
+});
 
-// app.use('/', function (req, res, next) {
-//   res.render('User')
-//   next();
-// });
+router.get('/datosingreso', (req, res) => {
+  res.render('empleados/datosingreso');
+});
+
+router.get('/lista', (req, res) => {
+  res.render('empleados/lista');
+});
 
 module.exports = router;
