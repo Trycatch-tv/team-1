@@ -11,80 +11,74 @@ router.get('/colaboradores', (req, res) => {
     colaboradores: [
       {
         id: 1,
-        nombres: 'Juan Perez',
-        cargo: 'Desarrollador Full-Stack',
+        nombres: 'Fanny Tunjano',
+        cargo: 'Desarrollador Frontend',
         descripcion:
           'Juan es un desarrollador full-stack con experiencia en JavaScript, Python y Java. Tiene un enfoque centrado en el usuario y se esfuerza por crear aplicaciones intuitivas y fáciles de usar.',
-        imagen: '/img/img01.jpg',
+        imagen: '/img/fanny.jpeg',
         contacto: {
-          email: 'juan.perez@example.com',
-          telefono: '+1 555-555-5555',
-          linkedin: 'https://example.com/juan_perez',
+          email: 'fannytunjano25@hotmail.com',
+          linkedin: 'http://www.linkedin.com/in/fanny-tunjano',
         },
       },
       {
         id: 2,
-        nombres: 'Maria Gomez',
-        cargo: 'Diseñadora UX/UI',
+        nombres: 'Luis Carlos Pacheco',
+        cargo: 'Desarrollador Backend',
         descripcion:
-          'Maria es una diseñadora UX/UI con una sólida formación en diseño gráfico y una gran pasión por crear experiencias digitales atractivas y efectivas. Tiene una amplia experiencia en el diseño de aplicaciones móviles y web.',
-        imagen: '/img/img02.jpg',
+          'Desarrollador backend jr, capacidad de adaptacion y aprendizaje.',
+        imagen: '/img/pacheco.jpeg',
         contacto: {
-          email: 'maria.gomez@example.com',
-          telefono: '+1 555-555-5555',
-          linkedin: 'https://example.com/maria_gomez',
+          email: 'pachecolanzziano@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/pachecolanzziano/',
         },
       },
       {
         id: 3,
-        nombres: 'Pedro Rodriguez',
+        nombres: 'Leonel Omar Amaya',
         cargo: 'Ingeniero de software',
         descripcion:
           'Pedro es un ingeniero de software altamente cualificado con experiencia en el desarrollo de sistemas de gran escala en entornos empresariales. Tiene habilidades técnicas excepcionales y un enfoque riguroso para el desarrollo de software.',
         imagen: '/img/img03.jpg',
         contacto: {
-          email: 'pedro.rodriguez@example.com',
-          telefono: '+1 555-555-5555',
-          linkedin: 'https://example.com/pedro_rodriguez',
+          email: 'leo.amaya2099@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/leonelamaya/',
         },
       },
       {
         id: 4,
-        nombres: 'Ana Gutierrez',
+        nombres: 'Juan Sebastian Soto',
         cargo: 'Analista de datos',
         descripcion:
-          'Ana es una analista de datos altamente motivada con una sólida formación en estadística y análisis de datos. Tiene experiencia en la manipulación de grandes conjuntos de datos y en la creación de modelos de predicción de alta precisión.',
+          'Estudiante de últimos semestres de ingeniería de sistemas, siempre buscando nuevos retos que hagan evolucionar mis habilidades.',
         imagen: '/img/img04.jpg',
         contacto: {
           email: 'ana.gutierrez@example.com',
-          telefono: '+1 555-555-5555',
-          linkedin: 'https://example.com/ana_gutierrez',
+          linkedin: 'https://www.linkedin.com/in/juan-sebastian-soto/',
         },
       },
       {
         id: 5,
-        nombres: 'Carlos López',
-        cargo: 'Ingeniero Industrial',
+        nombres: 'Camilo Andrés Charry',
+        cargo: 'Team-Lead',
         descripcion:
-          'Carlos es un ingeniero industrial con experiencia en la optimización de procesos y en la gestión de proyectos. Ha trabajado en empresas de diferentes sectores.',
-        imagen: '/img/img05.jpg',
+          'Me gusta aprender a diario, soy una persona a la cual le gusta proponer ideas y estudiar nuevas tecnologias.',
+        imagen: '/img/mispuri.png',
         contacto: {
-          email: 'carlos.lopez@example.com',
-          telefono: '555-6789',
-          linkedin: 'https://www.linkedin.com/in/carlos-lopez',
+          email: 'camiloandrescharry@outlook.es',
+          linkedin: 'https://www.linkedin.com/in/camilo-charry/',
         },
       },
       {
         id: 6,
-        nombres: 'Jose Perez',
-        cargo: 'Gerente de Marketing',
+        nombres: 'Rossill Paucar',
+        cargo: 'Desarrollador Frontend',
         descripcion:
-          'Juan tiene más de 10 años de experiencia en el área de marketing y ha liderado exitosas campañas publicitarias para varias marcas reconocidas.',
-        imagen: '/img/img06.jpg',
+          'Soy un desarrollador con experiencia en el desarrollo de software y conocimientos en lenguajes de programación como C, Java, JavaScript, Angular, Node.js, TypeScript y Python. Tengo gran capacidad de autoaprendizaje, trabajo en equipo y siempre estoy dispuesto a aportar mi conocimiento y habilidades para lograr resultados de alta calidad. También me interesa el campo de la ciencia de datos.',
+        imagen: '/img/rossil.jpeg',
         contacto: {
-          email: 'juan.perez@example.com',
-          telefono: '555-1234',
-          linkedin: 'https://www.linkedin.com/in/juan-perez',
+          email: 'edison0ed13@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/edison-paucar2020a/',
         },
       },
       {
@@ -96,7 +90,6 @@ router.get('/colaboradores', (req, res) => {
         imagen: '/img/img07.jpg',
         contacto: {
           email: 'maria.garcia@example.com',
-          telefono: '555-5678',
           linkedin: 'https://www.linkedin.com/in/maria-garcia',
         },
       },
@@ -109,7 +102,6 @@ router.get('/colaboradores', (req, res) => {
         imagen: '/img/img08.jpg',
         contacto: {
           email: 'Laura.Torres@example.com',
-          telefono: '555-9012',
           linkedin: 'https://www.linkedin.com/in/Laura-Torres',
         },
       },
@@ -175,12 +167,6 @@ router.get('/editProyecto/:id_empleado', async (req, res) => {
 router.post('/actualizar/:id', async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, fecha_inicio, fecha_final } = req.body;
-  // const newProyecto = {
-  //   nombre,
-  //   descripcion,
-  //   fecha_inicio,
-  //   fecha_final,
-  // };
   try {
     const resultado = await pool.query(
       'UPDATE PROYECTO SET nombre = ?, descripcion = ?, fecha_inicio = ?, fecha_final = ? WHERE id_empleado = ?',
