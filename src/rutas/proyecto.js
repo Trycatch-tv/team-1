@@ -121,6 +121,28 @@ router.get('/listaProyecto', async (req, res) => {
   res.render('proyecto/listaProyecto', { listaProyecto });
 });
 
+//lista buscar
+router.get('/listar', async (req, res) => {
+  const nombre = req.query.name;
+  console.log(nombre);
+  await pool.query(
+    "SELECT * FROM PROYECTO WHERE NOMBRE LIKE '%" + nombre + "%'",
+    function (error, results) {
+      if (!error) {
+        if (!results.length == 0) {
+          // res.send(results);
+          res.render('proyecto/listaProyecto', { listaProyecto: results });
+        } else {
+          res.send(`El Usuario no existe`);
+        }
+      } else {
+        console.log('error en listar empleados');
+        res.send(error);
+      }
+    }
+  );
+});
+
 //Metodo para ingresar los proyectos
 router.post('/ingresodatos', async (req, res) => {
   const { id_empleado, nombre, descripcion, fecha_inicio, fecha_final } =
@@ -155,13 +177,43 @@ router.get('/eliminarProyecto/:id_empleado', async (req, res) => {
 
 router.get('/editProyecto/:id_empleado', async (req, res) => {
   const { id_empleado } = req.params;
+  //
+  const convertDate = function (dateStr) {
+    if (dateStr == '' || dateStr == null) return '';
+    var fecha = new Date(dateStr);
+    var anio = fecha.getFullYear();
+    var mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    var dia = fecha.getDate().toString().padStart(2, '0');
+    var fechaFormateada = anio + '-' + mes + '-' + dia;
+    return fechaFormateada;
+  };
   const id = parseInt(id_empleado);
   const proyecto = await pool.query(
     'SELECT * from PROYECTO WHERE id_empleado = ?',
-    [id]
+    [id],
+    function (error, results, fields) {
+      if (!error) {
+        if (!results.length == 0) {
+          let proyecto = results.map((proyecto) => {
+            let nuevoProyecto = proyecto;
+            nuevoProyecto.fecha_inicio = convertDate(proyecto.fecha_inicio);
+            nuevoProyecto.fecha_final = convertDate(proyecto.fecha_final);
+            return nuevoProyecto;
+          });
+          // console.log('resultFormatDate', proyecto);
+
+          res.render('proyecto/editProyecto', { empleado: proyecto[0] });
+        } else {
+          res.send(`El ID:${id} no existe   y estoy en update`);
+        }
+      } else {
+        console.log('error en listar empleados');
+        res.send(error);
+      }
+    }
   );
+
   // console.log(proyecto);
-  res.render('proyecto/editProyecto', { empleado: proyecto[0] });
 });
 
 router.post('/actualizar/:id', async (req, res) => {

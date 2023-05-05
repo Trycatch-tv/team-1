@@ -2,6 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+// const { log } = require('console');
+// var favicon = require('serve-favicon')
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
 
 //INICIALIZACIONES
 const app = express();
@@ -36,7 +40,6 @@ app.use((req, res, next) => {
 app.use(require('./rutas/'));
 app.use('/empleados', require('./rutas/empleados'));
 app.use('/proyecto', require('./rutas/proyecto'));
-
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
 
