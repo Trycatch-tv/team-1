@@ -223,7 +223,7 @@ input[type=password],
 input[type=tel],
 button,
 button[type=submit] {
-  -moz-appearance: none;
+  /* -moz-appearance: none; */
   box-shadow: none !important;
 }
 
