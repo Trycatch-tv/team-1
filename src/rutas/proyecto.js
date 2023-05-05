@@ -47,18 +47,6 @@ router.get('/colaboradores', (req, res) => {
       },
       {
         id: 4,
-        nombres: 'Juan Sebastian Soto',
-        cargo: 'Analista de datos',
-        descripcion:
-          'Estudiante de últimos semestres de ingeniería de sistemas, siempre buscando nuevos retos que hagan evolucionar mis habilidades.',
-        imagen: '/img/img04.jpg',
-        contacto: {
-          email: 'ana.gutierrez@example.com',
-          linkedin: 'https://www.linkedin.com/in/juan-sebastian-soto/',
-        },
-      },
-      {
-        id: 5,
         nombres: 'Camilo Andrés Charry',
         cargo: 'Team-Lead',
         descripcion:
@@ -70,41 +58,17 @@ router.get('/colaboradores', (req, res) => {
         },
       },
       {
-        id: 6,
+        id: 5,
         nombres: 'Rossill Paucar',
         cargo: 'Desarrollador Frontend',
         descripcion:
           'Soy un desarrollador con experiencia en el desarrollo de software y conocimientos en lenguajes de programación como C, Java, JavaScript, Angular, Node.js, TypeScript y Python. Tengo gran capacidad de autoaprendizaje, trabajo en equipo y siempre estoy dispuesto a aportar mi conocimiento y habilidades para lograr resultados de alta calidad. También me interesa el campo de la ciencia de datos.',
-        imagen: '/img/rossil.jpeg',
+        imagen: '/img/rossill.jpeg',
         contacto: {
           email: 'edison0ed13@gmail.com',
           linkedin: 'https://www.linkedin.com/in/edison-paucar2020a/',
         },
-      },
-      {
-        id: 7,
-        nombres: 'María García',
-        cargo: 'Diseñadora Gráfica',
-        descripcion:
-          'María es una diseñadora altamente creativa con experiencia en diseño gráfico y web. Ha trabajado en proyectos para empresas en diversos sectores.',
-        imagen: '/img/img07.jpg',
-        contacto: {
-          email: 'maria.garcia@example.com',
-          linkedin: 'https://www.linkedin.com/in/maria-garcia',
-        },
-      },
-      {
-        id: 8,
-        nombres: 'Laura Torres',
-        cargo: 'Desarrollador de Software',
-        descripcion:
-          'Laura es un desarrollador de software altamente capacitado con experiencia en múltiples lenguajes de programación. Ha trabajado en proyectos de software en diferentes áreas.',
-        imagen: '/img/img08.jpg',
-        contacto: {
-          email: 'Laura.Torres@example.com',
-          linkedin: 'https://www.linkedin.com/in/Laura-Torres',
-        },
-      },
+      }
     ],
   };
   //console.log(colaboradores);
@@ -114,8 +78,15 @@ router.get('/colaboradores', (req, res) => {
 /********************* PROYECTO ************************/
 //Metodo para traer los proyectos de la base de datos
 router.get('/listaProyecto', async (req, res) => {
+  var { nombre } = req.query;
+
+  console.log(nombre);
+  if (typeof nombre !== 'string'){
+    console.log("Hlois");
+    nombre='';
+  }
   const listaProyecto = await pool.query(
-    'SELECT id_proyecto, id_empleado, nombre, descripcion, DATE_FORMAT(fecha_inicio, "%d-%m-%Y") AS fechaInit, DATE_FORMAT(fecha_final, "%d-%m-%Y") AS fechaEnd from PROYECTO'
+    'SELECT id_proyecto, id_empleado, nombre, descripcion, DATE_FORMAT(fecha_inicio, "%d-%m-%Y") AS fechaInit, DATE_FORMAT(fecha_final, "%d-%m-%Y") AS fechaEnd from PROYECTO WHERE nombre LIKE "%'+nombre+'%"'
   );
   // console.log(listaProyecto);
   res.render('proyecto/listaProyecto', { listaProyecto });
@@ -126,20 +97,21 @@ router.post('/ingresodatos', async (req, res) => {
   const { id_empleado, nombre, descripcion, fecha_inicio, fecha_final } =
     req.body;
   const id = parseInt(id_empleado);
+    
   // console.log(newProyecto);
   await pool.query(
-    'INSERT INTO PROYECTO (id_empleado, nombre, descripcion, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?)',
-    [id, nombre, descripcion, fecha_inicio, fecha_final]
+    'INSERT INTO PROYECTO (id_proyecto, id_empleado, nombre, descripcion, fecha_inicio, fecha_final) VALUES (?,?, ?, ?, ?, ?)',
+    [id_empleado,'22323334', nombre, descripcion, fecha_inicio, fecha_final]
   );
   res.redirect('/proyecto/listaProyecto');
 });
 
 //Metodo para eliminar proyectos
-router.get('/eliminarProyecto/:id_empleado', async (req, res) => {
+router.get('/eliminarProyecto/:id_proyecto', async (req, res) => {
   const { id_empleado } = req.params;
   try {
     const result = await pool.query(
-      'DELETE FROM PROYECTO WHERE id_empleado = ?',
+      'DELETE FROM PROYECTO WHERE id_proyecto = ?',
       [id_empleado]
     );
     res.redirect('/proyecto/listaProyecto');
@@ -157,10 +129,11 @@ router.get('/editProyecto/:id_empleado', async (req, res) => {
   const { id_empleado } = req.params;
   const id = parseInt(id_empleado);
   const proyecto = await pool.query(
-    'SELECT * from PROYECTO WHERE id_empleado = ?',
+    'SELECT id_proyecto, id_empleado, nombre, descripcion, DATE_FORMAT(fecha_inicio, "%Y-%m-%d") AS fecha_inicio, DATE_FORMAT(fecha_final, "%Y-%m-%d") AS fecha_final  from PROYECTO WHERE id_proyecto = ?',
     [id]
   );
   // console.log(proyecto);
+
   res.render('proyecto/editProyecto', { empleado: proyecto[0] });
 });
 
@@ -169,7 +142,7 @@ router.post('/actualizar/:id', async (req, res) => {
   const { nombre, descripcion, fecha_inicio, fecha_final } = req.body;
   try {
     const resultado = await pool.query(
-      'UPDATE PROYECTO SET nombre = ?, descripcion = ?, fecha_inicio = ?, fecha_final = ? WHERE id_empleado = ?',
+      'UPDATE PROYECTO SET nombre = ?, descripcion = ?, fecha_inicio = ?, fecha_final = ? WHERE id_proyecto = ?',
       [nombre, descripcion, fecha_inicio, fecha_final, id]
     );
     res.redirect('/proyecto/listaProyecto');

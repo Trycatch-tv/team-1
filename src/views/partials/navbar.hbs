@@ -1,4 +1,4 @@
-<header class="header">
+{{!-- <header class="header">
   <a href="/" class="logo">logo</a>
   <ul>
     <li><a href="/" id="link_style">Home</a></li>
@@ -8,4 +8,26 @@
     <li><a href="/proyecto/listaProyecto" id="link_style">Lista de proyectos</a></li>
     <li><a href="/proyecto/colaboradores" id="link_style">Acerca de nosotros</a></li>
   </ul>
-</header>
+</header> --}}
+
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="logo">
+        <h1>
+          <a href="/">
+            <img src="/img/Logo-OP-1.png" width="60" height="60" >
+            <span>Planilla</span>Online
+          </a>
+        </h1>
+      </div>
+      
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="/empleados/lista">Empleados</a></li>
+          <li><a class="nav-link scrollto" href="/proyecto/listaProyecto">Proyectos</a></li>
+          {{!-- <li><a class="nav-link scrollto" href="/proyecto/colaboradores">Team</a></li> --}}
+        </ul>
+      </nav><!-- .navbar -->
+    </div>
+</header><!-- End Header -->
