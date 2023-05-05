@@ -2,10 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const { log } = require('console');
-var favicon = require('serve-favicon')
-const bodyParser = require('body-parser');
-const cors = require('cors');
+// const { log } = require('console');
+// var favicon = require('serve-favicon')
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
 
 //INICIALIZACIONES
 const app = express();
@@ -30,7 +30,6 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
 
 //VARIABLES GLOBALES
 app.use((req, res, next) => {

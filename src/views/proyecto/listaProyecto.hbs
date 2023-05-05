@@ -5,13 +5,12 @@
       <div>
         <h2 style="padding-bottom: 20px;">Lista de proyectos</h2>
       </div>
-      <form action="">
+      <form action="/proyecto/listar" method="GET">
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text">Nombres y Apellidos</span>
+            <span class="input-group-text">Nombres</span>
           </div>
           <input type="text" aria-label="nombre" class="form-control" placeholder="Nombre" name="name" id="name">
-          <input type="text" aria-label="apellido" class="form-control" placeholder="Apellido" name="apellido" id="apellido">
           
           <div class="button">
               <button type="submit" class="btn btn-warning">Buscar</button>
