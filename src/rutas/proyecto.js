@@ -149,11 +149,17 @@ router.post('/ingresodatos', async (req, res) => {
     req.body;
   const id = parseInt(id_empleado);
   // console.log(newProyecto);
-  await pool.query(
-    'INSERT INTO PROYECTO (id_empleado, nombre, descripcion, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?)',
-    [id, nombre, descripcion, fecha_inicio, fecha_final]
-  );
-  res.redirect('/proyecto/listaProyecto');
+  try {
+    await pool.query(
+      'INSERT INTO PROYECTO (id_empleado, nombre, descripcion, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?)',
+      [id, nombre, descripcion, fecha_inicio, fecha_final]
+    );
+    res.redirect('/proyecto/listaProyecto');
+  } catch {
+    res.status(500).json({
+      message: 'Algo ha ido mal',
+    });
+  }
 });
 
 //Metodo para eliminar proyectos
