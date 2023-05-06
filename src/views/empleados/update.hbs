@@ -3,14 +3,11 @@
     <h2>Actualizar Empleado</h2>
     <h3>Datos personales</h3>
     {{#each data}} 
-    <form action="/empleados/update" method="POST">
-      <div class="form-grupo">
-      <input id="old_id" name="old_id" type="hidden" value="{{{this.id_empleado}}}">
-      </div>
+    <form action="/empleados/update/{{this.id_empleado}}" method="POST">
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
           <label for="name">Nombre</label>
-          <input type="text" name="name" id="name" value="{{{this.nombre}}}" required />
+          <input type="text" name="nombre" id="nombre" value="{{{this.nombre}}}" required />
         </div>
 
         <div class="form-grupo dobleInput">
@@ -21,19 +18,14 @@
 
       <div class="completeDoubleInputLine">
         <div class="form-grupo dobleInput">
-          <label for="identificacion">Identificación</label>
-          <input type="text" name="identificacion" id="identificacion" value="{{{this.id_empleado}}}" required />
-        </div>
-
-        <div class="form-grupo dobleInput">
           <label for="birthday">Fecha de nacimiento</label>
           <input type="date" name="birthday" id="birthday" value="{{{this.fecha_nacimiento}}}" required />
         </div>
-      </div>
 
-      <div class="form-grupo">
+        <div class="form-grupo dobleInput">
         <label for="direccion">Dirección</label>
         <input type="text" name="direction" id="direction" value="{{{this.direccion}}}" required />
+      </div>
       </div>
 
       <div class="completeDoubleInputLine">

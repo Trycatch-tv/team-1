@@ -2,10 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
-// const { log } = require('console');
-// var favicon = require('serve-favicon')
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
 
 //INICIALIZACIONES
 const app = express();

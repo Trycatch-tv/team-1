@@ -113,7 +113,7 @@ router.get('/update/:id', async (req, res) => {
 
           res.render(`empleados/update`, { data: resultFormatDate });
         } else {
-          res.send(`El ID:${id} no existe   y estoy en update`);
+          res.send(`El ID:${id} no existe`);
         }
       } else {
         console.log('error en listar empleados');
@@ -124,10 +124,10 @@ router.get('/update/:id', async (req, res) => {
 });
 
 //Actualiza los datos enviados en el form
-router.post('/update', async (req, res) => {
+router.post('/update/:id_empleado', async (req, res) => {
+  const { id_empleado } = req.params;
   const Nombre = req.body.nombre;
   const Apellido = req.body.apellido;
-  const idEmpleado = req.body.identificacion;
   const FechaNacimiento = req.body.birthday;
   const Direccion = req.body.direction;
   const Email = req.body.email;
@@ -136,12 +136,10 @@ router.post('/update', async (req, res) => {
   const Departamento = req.body.department;
   const FechaIngreso = req.body.ingreso;
   const Sueldo = req.body.sueldo;
-  const old_id_empleado = req.body.old_id;
 
   await pool.query(
-    'UPDATE `EMPLEADO` SET `id_empleado`= ?,`nombre`= ?,`apellido`= ?,`fecha_nacimiento`= ?,`direccion`= ?,`email`= ?,`telefono`= ?,`departamento`= ?,`cargo`= ?,`fecha_ingreso`= ?,`sueldo`= ? WHERE `id_empleado`= ? ',
+    'UPDATE `EMPLEADO` SET `nombre`= ?,`apellido`= ?,`fecha_nacimiento`= ?,`direccion`= ?,`email`= ?,`telefono`= ?,`departamento`= ?,`cargo`= ?,`fecha_ingreso`= ?,`sueldo`= ? WHERE `id_empleado`= ? ',
     [
-      idEmpleado,
       Nombre,
       Apellido,
       FechaNacimiento,
@@ -152,7 +150,7 @@ router.post('/update', async (req, res) => {
       Cargo,
       FechaIngreso,
       Sueldo,
-      old_id_empleado,
+      id_empleado,
     ],
     function (error, results, fields) {
       if (!error) {
@@ -167,17 +165,13 @@ router.post('/update', async (req, res) => {
   );
 });
 
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id_empleado', async (req, res) => {
+  const { id_empleado } = req.params;
   try {
-    const { id } = req.params;
-    await pool.query(
-      'DELETE FROM `EMPLEADO` WHERE `id_empleado`= ?',
-      [id],
-      function (error, results, fields) {
-        // res.send(results);
-        res.redirect('/empleados/lista');
-      }
-    );
+    await pool.query('DELETE FROM EMPLEADO WHERE id_empleado= ?', [
+      id_empleado,
+    ]);
+    res.redirect('/empleados/lista');
   } catch (err) {
     res.send(err);
   }

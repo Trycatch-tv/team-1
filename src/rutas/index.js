@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
           'Estudiante de últimos semestres de ingeniería de sistemas, siempre buscando nuevos retos que hagan evolucionar mis habilidades.',
         imagen: '/img/sebastian.jpeg',
         contacto: {
-          email: 'ana.gutierrez@example.com',
+          email: 'atlasjuanse12@gmail.com',
           linkedin: 'https://www.linkedin.com/in/juan-sebastian-soto/',
         },
       },
@@ -82,7 +82,7 @@ router.get('/', (req, res) => {
         nombres: 'Juan Carlos Del Río',
         cargo: 'Desarrollador Frontend',
         descripcion:
-          'María es una diseñadora altamente creativa con experiencia en diseño gráfico y web. Ha trabajado en proyectos para empresas en diversos sectores.',
+          'Soy un desarrollador en constante aprendizaje dedicado a desarrollar mis habilidades tanto en el FrontEnd como en el Backend, dispuesto a tomar retos y así contribuir a la solución de problemas mediante la aplicación de herramientas de desarrollo. Conocimientos en HTML, CSS, JS, React, Node, JWT',
         imagen: '/img/juanCarlos.jpeg',
         contacto: {
           email: 'data@delrioe.com',
