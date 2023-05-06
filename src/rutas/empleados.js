@@ -14,13 +14,17 @@ router.get('/lista', async (req, res) => {
 
 //buscar por id
 router.get('/listar', async (req, res) => {
-  const nombre = req.query.name;
+  const nombre = req.query.nombre;
   const apellido = req.query.apellido;
-  console.log(nombre);
-  console.log(apellido);
+  // console.log(nombre);
+  // console.log(apellido);
   await pool.query(
-    'SELECT * FROM `EMPLEADO` WHERE nombre= ? or apellido= ? ',
-    [nombre, apellido],
+    "SELECT * FROM EMPLEADO WHERE NOMBRE LIKE '%" +
+      nombre +
+      "%'" +
+      "OR APELLIDO LIKE '%" +
+      apellido +
+      "%'",
     function (error, results) {
       if (!error) {
         if (!results.length == 0) {
@@ -38,7 +42,7 @@ router.get('/listar', async (req, res) => {
 });
 
 router.post('/registro', async (req, res) => {
-  const Nombre = req.body.name;
+  const Nombre = req.body.nombre;
   const Apellido = req.body.apellido;
   const idEmpleado = req.body.identificacion;
   const FechaNacimiento = req.body.birthday;
@@ -121,7 +125,7 @@ router.get('/update/:id', async (req, res) => {
 
 //Actualiza los datos enviados en el form
 router.post('/update', async (req, res) => {
-  const Nombre = req.body.name;
+  const Nombre = req.body.nombre;
   const Apellido = req.body.apellido;
   const idEmpleado = req.body.identificacion;
   const FechaNacimiento = req.body.birthday;

@@ -8,12 +8,13 @@
       <form action="/proyecto/listar" method="GET">
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text">Nombres</span>
+            <span class="input-group-text">Nombre del Proyecto</span>
           </div>
-          <input type="text" aria-label="nombre" class="form-control" placeholder="Nombre" name="name" id="name">
+          <input type="text" aria-label="nombre" class="form-control" placeholder="Nombre del Proyecto" name="nombre" id="name">
           
-          <div class="button">
-              <button type="submit" class="btn btn-warning">Buscar</button>
+          <div class="button px-1">
+              <button type="submit" class="btn btn-primary">Buscar</button>
+              <a class="btn btn-success" href="/proyecto/nuevo">Agregar</a>
           </div>
           
         </div>
@@ -25,9 +26,9 @@
         <tr>
           <th scope="col" style="width: 6%;">#</th>
           <th scope="col" style="width: 20%;">Nombre proyecto</th>
-          <th scope="col" style="width: 20%;">Descripcion</th>
-          <th scope="col" style="width: 20%;">Fecha inicial</th>
-          <th scope="col" style="width: 30%;">Fecha final</th>
+          <th scope="col" style="width: 30%;">Descripcion</th>
+          <th scope="col" style="width: 20%;">Fecha Inicial</th>
+          <th scope="col" style="width: 20%;">Fecha Final</th>
           <th scope="col" style="width: 10%;">Accion</th>
         </tr>
       </thead>

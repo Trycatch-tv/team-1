@@ -38,8 +38,8 @@ router.get('/colaboradores', (req, res) => {
         nombres: 'Leonel Omar Amaya',
         cargo: 'Ingeniero de software',
         descripcion:
-          'Pedro es un ingeniero de software altamente cualificado con experiencia en el desarrollo de sistemas de gran escala en entornos empresariales. Tiene habilidades técnicas excepcionales y un enfoque riguroso para el desarrollo de software.',
-        imagen: '/img/img03.jpg',
+          'Desarrollador Backend junior apasionado por la tecnología y el desarrollo de software, con gran capacidad de adaptación y aprendizaje , enfocado a objetivos y un sólido entendido de buenas prácticas de programación.',
+        imagen: '/img/leonel.jpeg',
         contacto: {
           email: 'leo.amaya2099@gmail.com',
           linkedin: 'https://www.linkedin.com/in/leonelamaya/',
@@ -115,7 +115,7 @@ router.get('/colaboradores', (req, res) => {
 //Metodo para traer los proyectos de la base de datos
 router.get('/listaProyecto', async (req, res) => {
   const listaProyecto = await pool.query(
-    'SELECT id_proyecto, id_empleado, nombre, descripcion, DATE_FORMAT(fecha_inicio, "%d-%m-%Y") AS fechaInit, DATE_FORMAT(fecha_final, "%d-%m-%Y") AS fechaEnd from PROYECTO'
+    'SELECT id_empleado, nombre, descripcion, DATE_FORMAT(fecha_inicio, "%d-%m-%Y") AS fechaInit, DATE_FORMAT(fecha_final, "%d-%m-%Y") AS fechaEnd from PROYECTO'
   );
   // console.log(listaProyecto);
   res.render('proyecto/listaProyecto', { listaProyecto });
@@ -123,8 +123,8 @@ router.get('/listaProyecto', async (req, res) => {
 
 //lista buscar
 router.get('/listar', async (req, res) => {
-  const nombre = req.query.name;
-  console.log(nombre);
+  const nombre = req.query.nombre;
+  // console.log(nombre);
   await pool.query(
     "SELECT * FROM PROYECTO WHERE NOMBRE LIKE '%" + nombre + "%'",
     function (error, results) {

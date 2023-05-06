@@ -2,7 +2,6 @@
   <section class="contact">
     <h2>Editar proyecto</h2>
     <form action="/proyecto/actualizar/{{empleado.id_empleado}}" method="post">
-
       <div class="form-grupo dobleInput">
         <label for="proyectName">Nombre del proyecto</label>
         <input type="text" name="nombre" value="{{empleado.nombre}}" id="proyectName" required />
@@ -32,7 +31,7 @@
 
 
       <div class="button">
-        <button type="submit">Registrar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
       </div>
     </form>
   </section>
