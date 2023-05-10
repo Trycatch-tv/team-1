@@ -5,7 +5,9 @@ const pool = require('../database');
 router.get('/registro', (req, res) => {
   res.render('empleados/registro');
 });
-
+router.get('/login', (req, res) => {
+  res.render('empleados/login');
+});
 router.get('/lista', async (req, res) => {
   const list = await pool.query('SELECT * FROM EMPLEADO');
   // console.log(list);
